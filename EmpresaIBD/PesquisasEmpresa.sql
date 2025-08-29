@@ -21,7 +21,7 @@ INNER JOIN DEPARTAMENTO AS D
 ON P.Dnum = D.Dnumero
 INNER JOIN FUNCIONARIO AS F
 ON D.Cpf_gerente = F.Cpf
-WHERE P.Projlocal = 'Mauá';
+WHERE P.Projlocal = 'MauÃ¡';
 
 -- LEFT JOIN
 SELECT F.Pnome AS 'F_Nome', F.Unome AS 'F_Sobrenome' ,S.Unome AS 'Supervisor'
@@ -141,4 +141,28 @@ FROM FUNCIONARIO AS F
 WHERE EXISTS (
 				SELECT 1
 				FROM DEPARTAMENTO AS D
+
 				WHERE F.Cpf = D.Cpf_gerente);
+
+-- ALL (Todos)
+SELECT *
+FROM FUNCIONARIO AS F
+WHERE F.Salario > ALL (
+						SELECT F.Salario
+						FROM FUNCIONARIO AS F
+						INNER JOIN DEPARTAMENTO AS D
+						ON F.Dnr = D.Dnumero
+						WHERE D.Dnumero = 4
+						);
+
+SELECT *
+FROM PROJETO AS P
+INNER JOIN TRABALHA_EM AS TE
+ON P.Projnumero = TE.Pnr
+WHERE TE.Horas > ALL (
+						SELECT SUM(TE.Horas)
+						FROM TRABALHA_EM AS TE
+						INNER JOIN PROJETO AS P
+						ON TE.Pnr = P.Projnumero
+						WHERE P.Projlocal = 'Itu'
+					);
