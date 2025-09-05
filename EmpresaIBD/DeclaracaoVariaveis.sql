@@ -93,3 +93,57 @@ ELSE
 		PRINT @nome_funcionaria + ' não está perto de se aposentar';
 	END;
 
+
+--
+DECLARE @tamanho_dpt INT;
+DECLARE @nr_dpt INT;
+
+SET @nr_dpt = 5;
+
+SET @tamanho_dpt = (
+					SELECT COUNT(F.Cpf)
+					FROM DEPARTAMENTO AS D
+					INNER JOIN FUNCIONARIO AS F
+					ON D.Dnumero = F.Dnr
+					WHERE D.Dnumero = @nr_dpt);
+
+IF @tamanho_dpt <= 1
+	BEGIN
+		PRINT CAST(@tamanho_dpt AS VARCHAR(5)) + ' funcionários. Departamento pequeno'
+	END;
+ELSE IF @tamanho_dpt = 2 OR @tamanho_dpt = 3
+	BEGIN
+		PRINT CAST(@tamanho_dpt AS VARCHAR(5)) + ' funcionários. Departamento médio'
+	END;
+ELSE
+	BEGIN
+		PRINT CAST(@tamanho_dpt AS VARCHAR(5)) + ' funcionários. Departamento grande'
+	END;
+
+
+-- WHILE
+
+DECLARE @valor INT;
+
+SET @valor = 0;
+
+WHILE @valor < 10
+	BEGIN
+		PRINT 'Número: ' + CAST(@valor AS VARCHAR(3))
+		SET @valor = @valor + 1
+	END;
+
+
+DECLARE @salario MONEY;
+
+SET @salario = (
+				SELECT F.Salario
+				FROM FUNCIONARIO AS F
+				WHERE F.Pnome = 'Joice' AND F.Unome = 'Leite');
+
+
+WHILE @salario <= 30000
+	BEGIN
+		PRINT 'Salário de Joice Leite: ' + CAST(@salario AS VARCHAR(30))
+		SET @salario = @salario * 1.05
+	END;
