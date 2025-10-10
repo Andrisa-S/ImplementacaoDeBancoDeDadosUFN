@@ -185,6 +185,10 @@ VALUES ('Carlos', 'M', 'Ferreira', '12312312311', '1980-02-15', 'Av. Paulista, 1
 ('Pedro', 'A', 'Silva', '65465465433', '1990-11-10', 'Rua da Praia, 200, Salvador, BA', 'M', 47000, NULL, NULL);
 GO
 
+INSERT INTO FUNCIONARIO (Pnome, Minicial, Unome, Cpf, Datanasc, Endereco, Sexo, Salario, Cpf_supervisor, Dnr, Data_Admissao, Bonus)
+VALUES
+('Andrisa', 'S', 'Silva', '6546558333', '1990-11-10', 'Rua da Praia, 200, Santa Maria, RS', 'F', 50000, NULL, 8, '2025-01-11', 500);
+
 INSERT INTO DEPARTAMENTO (Dnome, Dnumero)
 VALUES ('Vendas', 6),
 ('RH', 7),
